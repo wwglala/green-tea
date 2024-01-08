@@ -32,7 +32,7 @@ program
         {
           type: "input",
           name: "path_name",
-          message: "请填写子项目路径名称",
+          message: "请填写子项目路径名称(以apps/components/packages开始)",
           validate(path_name) {
             return Boolean(path_name);
           },
@@ -57,7 +57,7 @@ program
         {
           type: "input",
           name: "path_name",
-          message: "请填写子项目路径名称",
+          message: "请填写子项目路径名称(以apps/components/packages开始)",
           validate(path_name) {
             return Boolean(path_name);
           },

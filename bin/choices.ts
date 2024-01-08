@@ -5,7 +5,7 @@ export const choices = {
   business: {
     path_name: {
       call(res: QuestionProps) {
-        console.log(res);
+        throw new Error("This module has not been implemented yet");
       },
     },
   },
@@ -25,6 +25,11 @@ export const choices = {
       call(res: QuestionProps) {
         console.log("sub");
         return downloadRollupRepo(res.path_name);
+      },
+    },
+    business: {
+      call(res: QuestionProps) {
+        throw new Error("This module has not been implemented yet");
       },
     },
   },
