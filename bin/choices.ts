@@ -1,11 +1,25 @@
-import { QuestionProps } from "./cli";
-import { downloadGit } from "./utils";
+import { QuestionProps } from ".";
+import { changeVersion, changeset, downloadGit } from "./utils";
 
 export const choices = {
+  chs: {
+    call() {
+      return changeset();
+    },
+  },
+  chv: {
+    call() {
+      return changeVersion();
+    },
+  },
   business: {
     path_name: {
       call(res: QuestionProps) {
-        throw new Error("This module has not been implemented yet");
+        console.log("init");
+        return downloadMonoRepo("./").then(() => {
+          console.log("down the first one");
+          return downloadWebpackRepo(res.path_name);
+        });
       },
     },
   },
@@ -40,3 +54,6 @@ export const downloadMonoRepo = (path: string) =>
 
 export const downloadRollupRepo = (path: string) =>
   downloadGit("https://github.com/wwglala/monorepo-rollup-template.git", path);
+
+export const downloadWebpackRepo = (path: string) =>
+  downloadGit("https://github.com/wwglala/monorepo-webpack-template.git", path);

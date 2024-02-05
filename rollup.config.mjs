@@ -6,9 +6,9 @@ import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 
 export default defineConfig({
-  input: "./bin/cli.ts",
+  input: "./bin/index.ts",
   output: {
-    file: "dist/cli.js",
+    file: "dist/index.js",
     format: "cjs",
   },
   plugins: [

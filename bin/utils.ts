@@ -1,10 +1,9 @@
 import { spawn } from "child_process";
 
-export const downloadGit = (url: string, localPath: string) =>
+const cmdForSpawn = (main: string, args: string[], flag: string) =>
   new Promise<void>((resolve, reject) => {
-    const git = spawn("git", ["clone", "--progress", url, localPath]);
-
-    git.stderr.on("data", (chunk) => {
+    const ins = spawn(main, args);
+    ins.stderr.on("data", (chunk) => {
       const message = /^([\s\S]+?):\s*(\d+)% \((\d+)\/(\d+)\)/.exec(
         chunk.toString("utf8")
       );
@@ -18,16 +17,24 @@ export const downloadGit = (url: string, localPath: string) =>
         progress: message[2],
       };
 
-      console.log(`git ${stage} stage ${progress}% complete \n`);
+      console.log(`${flag} ${stage} stage ${progress}% complete \n`);
     });
-
-    git.on("exit", (code) => {
+    ins.on("exit", (code) => {
       if (code !== 0) {
-        console.error(`Git clone process exited with code ${code}`);
+        console.error(`${flag} exited with code ${code}`);
         reject(code);
       } else {
-        console.log(`Git clone successful!`);
+        console.log(`${flag} successful!`);
         resolve();
       }
     });
   });
+
+export const downloadGit = (url: string, localPath: string) =>
+  cmdForSpawn("git", ["clone", "--progress", url, localPath], "GIT Clone");
+
+export const changeset = () =>
+  cmdForSpawn("pnpm", ["changeset"], "PNPM Changeset");
+
+export const changeVersion = () =>
+  cmdForSpawn("pnpm", ["changeset", "version"], "PNPM Changeset Version");

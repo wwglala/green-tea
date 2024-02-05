@@ -67,4 +67,14 @@ program
       .catch(console.log)
   );
 
+program
+  .command("chs")
+  .description("generate changeset for modify packages")
+  .action(() => choices.chs.call());
+
+program
+  .command("chv")
+  .description("update version for modify packages")
+  .action(() => choices.chv.call());
+
 program.parse();

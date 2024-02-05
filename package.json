@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "bin": {
-    "gt": "./dist/cli.js"
+    "gee": "./dist/index.js"
   },
   "scripts": {
-    "start": "node dist/cli.js",
+    "start": "node dist/index.js",
     "build": "rollup -c -w"
   },
   "author": "",
