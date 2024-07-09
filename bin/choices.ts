@@ -4,6 +4,7 @@ import {
   changeset,
   downloadGit,
   modifyPackageName,
+  removeGItDir,
 } from './utils';
 
 export const choices = {
@@ -15,6 +16,12 @@ export const choices = {
   chv: {
     call() {
       return changeVersion();
+    },
+  },
+  monorepo: {
+    call() {
+      console.log('init');
+      return downloadMonoRepo('./');
     },
   },
   business: {
@@ -56,7 +63,9 @@ export const choices = {
 };
 
 export const downloadMonoRepo = (path: string) =>
-  downloadGit('https://github.com/wwglala/monorepo-template.git', path);
+  downloadGit('https://github.com/wwglala/monorepo-template.git', path).then(
+    () => removeGItDir(path)
+  );
 
 export const downloadRollupRepo = (path: string, name = '') =>
   downloadGit(

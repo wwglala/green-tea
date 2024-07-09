@@ -1,5 +1,5 @@
 import { spawn } from 'child_process';
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile, rm } from 'fs/promises';
 import path from 'path';
 
 const cmdForSpawn = (main: string, args: string[], flag: string) =>
@@ -51,4 +51,11 @@ export const modifyPackageName = (localPath: string, name: string) => {
     .then((json) => ((json.name = name), json))
     .then((json) => JSON.stringify(json, null, 2))
     .then((json) => writeFile(filePath, json, 'utf-8'));
+};
+
+export const removeGItDir = (localPath: string) => {
+  const gitDir = localPath.endsWith('.git')
+    ? localPath
+    : path.join(localPath, '.git');
+  return rm(gitDir, { recursive: true });
 };

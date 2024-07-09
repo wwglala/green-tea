@@ -53,27 +53,7 @@ program
 program
   .command('init')
   .description('init a monorepo registry')
-  .action(() =>
-    inquirer
-      .prompt<QuestionProps>([
-        {
-          type: 'list',
-          name: 'type',
-          message: '请选择要创建的应用',
-          choices: ['business', 'module'],
-        },
-        {
-          type: 'input',
-          name: 'path_name',
-          message: '请填写子项目路径名称(以apps/components/packages开始)',
-          validate(path_name) {
-            return Boolean(path_name);
-          },
-        },
-      ])
-      .then((res) => choices[res.type].path_name.call(res))
-      .catch(console.log)
-  );
+  .action(() => choices.monorepo.call().catch(console.log));
 
 program
   .command('chs')
