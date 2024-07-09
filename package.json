@@ -1,6 +1,6 @@
 {
   "name": "@waou/green-tea",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "bin": {
     "gee": "./dist/index.js"
