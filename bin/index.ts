@@ -6,7 +6,7 @@ import { Command } from 'commander';
 import packageJson from '../package.json';
 
 export interface QuestionProps {
-  type: 'business' | 'module';
+  type: 'apps' | 'packages' | 'utils';
   name: string;
   path_name: string;
 }
@@ -28,25 +28,24 @@ program
           type: 'list',
           name: 'type',
           message: '请选择要创建的应用',
-          choices: ['business', 'module'],
+          choices: ['apps', 'packages', 'utils'],
         },
         {
           type: 'input',
           name: 'name',
-          message: "请填写 'package.json' name",
+          message: '请填写 `package.json` name',
         },
         {
           type: 'input',
           name: 'path_name',
-          message:
-            '请填写子项目路径名称(以apps/components/packages开始)[不能以“/”开头]',
+          message: '请填写子项目路径名称',
           validate(path_name: string) {
-            return Boolean(path_name) && !path_name.startsWith('/');
+            return Boolean(path_name);
           },
         },
       ])
 
-      .then((res) => choices.path_name[res.type].call(res))
+      .then((res) => choices.create[res.type].call(res))
       .catch(console.log)
   );
 
@@ -56,13 +55,13 @@ program
   .action(() => choices.monorepo.call().catch(console.log));
 
 program
-  .command('chs')
+  .command('ac')
   .description('generate changeset for modify packages')
-  .action(() => choices.chs.call());
+  .action(() => choices.ac.call());
 
 program
-  .command('chv')
+  .command('up')
   .description('update version for modify packages')
-  .action(() => choices.chv.call());
+  .action(() => choices.up.call());
 
 program.parse();

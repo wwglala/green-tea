@@ -24,6 +24,7 @@
     "download-git-repo": "^3.0.2",
     "electron": "^28.1.1",
     "inquirer": "^9.2.12",
+    "prettier": "^3.3.3",
     "rollup": "^4.9.2",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3"
