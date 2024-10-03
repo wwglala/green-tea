@@ -3,11 +3,13 @@
   "version": "0.0.4",
   "description": "",
   "bin": {
-    "gee": "./dist/index.js"
+    "gee": "dist/index.js"
   },
   "scripts": {
     "start": "node dist/index.js",
-    "build": "rollup -c -w"
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "prepublish": "npm run build"
   },
   "author": "",
   "license": "ISC",
